@@ -1,0 +1,9 @@
+<% @flats.each do |flat| %>
+<%= cl_image_tag(flat.photo, height: 300, width: 400) %>
+<%= flat.title   %>
+<%= flat.city %>
+<%= flat.description%>
+<%= flat.price %>
+<%= flat.capacity %>
+<% end %>
+
