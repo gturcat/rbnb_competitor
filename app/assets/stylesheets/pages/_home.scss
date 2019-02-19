@@ -7,17 +7,10 @@ h2 {
   text-align: center;
 }
 
-.flex-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  @media (max-width:540px) {
-    display: block;
-  }
-
-}
 
 .card {
   padding: 10px ;
 }
+
+
