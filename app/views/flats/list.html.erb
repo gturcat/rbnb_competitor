@@ -1,0 +1,18 @@
+
+<div class="container">
+  <% @flats.each do |flat| %>
+  <div class="card-list">
+    <div class="flat-photo">
+      <%= cl_image_tag(flat.photo, height: 250, width: 350) %>
+    </div>
+    <div class="flat-content">
+      <h4><%= flat.title %></h4>
+      <p><%= flat.city %></p>
+      <p><%= flat.description%></p>
+      <p> <%= flat.price %> $ |
+      <span> <%= flat.capacity %> persons</span>
+      </p>
+    </div>
+  </div>
+  <% end %>
+</div>
