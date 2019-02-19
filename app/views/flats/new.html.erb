@@ -1,0 +1,19 @@
+
+<div class="container">
+<h1>new flat</h1>
+
+<%= simple_form_for @flat do |f| %>
+  <%= f.input :country, as: :string %>
+  <%= f.input :city %>
+  <%= f.input :street %>
+  <%= f.input :street_number %>
+  <%= f.input :zip_code %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :capacity %>
+  <%= f.input :price %>
+  <%= f.input :photo %>
+  <%= f.input :photo_cache, as: :hidden%>
+  <%= f.button :submit %>
+<% end %>
+</div>
