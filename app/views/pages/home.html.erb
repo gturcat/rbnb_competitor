@@ -1,2 +1,31 @@
-<h1>Attention, on arrive😆</h1>
-
+<div class="container">
+  <h1>HairBnb, Chez-vous, Mais ailleurs Sans coiffeur</h1>
+  <h2>The best AirBnb Ever</h2>
+  <!-- <div class="flex-container"> -->
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-4 card ">
+      <%= image_tag "cottage", alt: "alttext", class: "img-responsive" %>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 card">
+      <%= image_tag "hotel", alt: "alttext", class: "img-responsive" %>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 card">
+      <%= image_tag "suite_appartement", alt: "alttext", class: "img-responsive" %>
+    </div>
+  </div>
+  <% if user_signed_in? %>
+  <%= link_to "#", class: "btn btn-primary col-xs-6 col-sm-6 col-md-6" do  %>
+  <%= t(".search", default: "Search") %>
+  <% end %>
+  <%= link_to "#", class: "btn btn-danger col-xs-6 col-sm-6 col-md-6"  do  %>
+  <%= t(".create", default: "Create a flat")%>
+  <% end %>
+  <% else %>
+  <div class="row">
+    <!-- </div> -->
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <%= image_tag "suite_appartement", alt: "Suite", class: "img-responsive crop-height" %>
+    </div>
+  </div>
+  <% end %>
+</div>
