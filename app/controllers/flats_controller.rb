@@ -1,9 +1,15 @@
 class FlatsController < ApplicationController
 
   def list
-  @flats = Flat.all
+    if params[:city].nil?
+      @flats = Flat.where(user: current_user)
+    else
+      @flats = Flat.where(city: params[:city])
+    end
   # attention : ajouter .where(flat.user == current_user) quand devise sera integre
   end
+
+
 
   def new
     @flat = Flat.new
