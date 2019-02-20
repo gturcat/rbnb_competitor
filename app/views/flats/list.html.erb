@@ -1,5 +1,5 @@
-
 <div class="container">
+  <h1>My flats</h1>
   <% @flats.each do |flat| %>
   <div class="card-list">
     <div class="flat-photo">
@@ -10,7 +10,7 @@
       <p><%= flat.city %></p>
       <p><%= flat.description%></p>
       <p> <%= flat.price %> $ |
-      <span> <%= flat.capacity %> persons</span>
+        <span> <%= flat.capacity %> persons</span>
       </p>
       <%= link_to "book", new_flat_booking_path(flat.id) %>
     </div>
