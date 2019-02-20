@@ -16,3 +16,23 @@ font-size: 23px;
 .card {
   padding: 10px ;
 }
+
+.flexbox {
+  display: flex;
+  align-items: center;
+
+}
+
+.flex-item- {
+  flex: 0 0 50%;
+  text-align:center;
+}
+
+
+#flat-create {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
