@@ -6,12 +6,17 @@
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
     <% if user_signed_in? %>
-    <!-- Links when logged in -->
-    <!--       <%= link_to "Host", "#", class: "navbar-wagon-item navbar-wagon-link" %>
-    <%= link_to "Trips", "#", class: "navbar-wagon-item navbar-wagon-link" %>
-    <%= link_to "Messages", "#", class: "navbar-wagon-item navbar-wagon-link" %> -->
-    <!-- Avatar with dropdown menu -->
+    <!-- Myflats link (when logged out) -->
+    <%= link_to t(".my_flats", default: "My Flats"),
+    flats_list_path, class: "navbar-wagon-item navbar-wagon-link" %>
+    <!-- Mybookings link (when logged out) -->
+    <%= link_to t(".my_bookings", default: "My Bookings"),
+    bookings_index_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
     <div class="navbar-wagon-item">
+
+
+    <!-- Avatar with dropdown menu -->
       <div class="dropdown">
         <% if user_signed_in? %>
         <%= image_tag "blank_avatar.png", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
@@ -22,11 +27,6 @@
           <li>
             <%= link_to edit_user_registration_path do %>
             <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
-            <% end %>
-          </li>
-          <li>
-            <%= link_to "#" do %>
-            <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
             <% end %>
           </li>
           <li>
