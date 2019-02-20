@@ -1,32 +1,46 @@
-<div class="container">
-  <h1>HairBnb, Chez-vous, Mais ailleurs Sans coiffeur</h1>
-  <h2>The best AirBnb Ever</h2>
+
+  <div class="container">
+  <h1>Explorer AirBnB</h1>
+  <h2>Maisons à la une à Los Angeles</h2>
   <!-- <div class="flex-container"> -->
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-md-4 card ">
-      <%= image_tag "cottage.jpg", alt: "alttext", class: "img-responsive" %>
+      <%= image_tag "malibu1.jpg", alt: "alttext", class: "img-responsive" %>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-4 card">
-      <%= image_tag "hotel.jpg", alt: "alttext", class: "img-responsive" %>
+      <%= image_tag "malibu2.jpeg", alt: "alttext", class: "img-responsive" %>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-4 card">
-      <%= image_tag "suite_appartement.jpg", alt: "alttext", class: "img-responsive" %>
+      <%= image_tag "malibu3.jpeg", alt: "alttext", class: "img-responsive" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-4 card ">
+      <%= image_tag "malibu4.jpeg", alt: "alttext", class: "img-responsive" %>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 card">
+      <%= image_tag "malibu5.jpeg", alt: "alttext", class: "img-responsive" %>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 card">
+      <%= image_tag "santamonicahouse.jpg", alt: "alttext", class: "img-responsive" %>
     </div>
   </div>
   <% if user_signed_in? %>
-<!--  -->
-    <%= link_to "#", class: "btn btn-primary col-xs-6 col-sm-6 col-md-6" do  %>
-      <%= t(".search", default: "Search") %>
-    <% end %>
+  <form action="flats/list" method="get" class="col-xs-6 col-sm-6 col-md-6">
+    <div>
+      <label for="city">City :</label>
+      <input type="text" id="city" name="city">
+    </div>
+    <div>
+      <label for="capacity">Capacity :</label>
+      <input type="integer" id="capacity" name="capacity">
+    </div>
+    <div class="button">
+      <button type="submit" class="btn btn-primary btn-block">Search</button>
+    </div>
+  </form>
     <%= link_to new_flat_path, class: "btn btn-danger col-xs-6 col-sm-6 col-md-6"  do  %>
       <%= t(".create", default: "Create a flat")%>
-     <% end %>
-  <% else %>
-  <div class="row">
-    <!-- </div> -->
-    <div class="col-xs-12 col-sm-12 col-md-12">
-      <%= image_tag "suite_appartement.jpg", alt: "Suite", class: "img-responsive crop-height" %>
-
-    </div>
-  <% end %>
-</div>
+    <% end %>
+    <% end %>
+  </div>
