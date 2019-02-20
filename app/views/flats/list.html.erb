@@ -12,6 +12,7 @@
       <p> <%= flat.price %> $ |
       <span> <%= flat.capacity %> persons</span>
       </p>
+      <%= link_to "book", new_flat_booking_path(flat.id) %>
     </div>
   </div>
   <% end %>
