@@ -1,0 +1,10 @@
+
+<div class="flex-container-form">
+<h1>new bookin</h1>
+
+<%= simple_form_for [@flat, @booking] do |f| %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.button :submit %>
+<% end %>
+</div>
