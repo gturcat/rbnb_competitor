@@ -8,6 +8,14 @@ class FlatsController < ApplicationController
      @flats = @flats.where(city: params[:city]) if params[:city] != ""
      @flats = @flats.where("capacity >= #{params[:capacity]}") if params[:capacity] != ""
    end
+   @flats = @flats.where.not(latitude: nil, longitude: nil)
+
+    @markers = @flats.map do |flat|
+      {
+        lng: flat.longitude,
+        lat: flat.latitude
+      }
+    end
  end
 
 
