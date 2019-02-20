@@ -1,10 +1,10 @@
 class FlatsController < ApplicationController
 
   def list
-    if params[:city].nil?
+    if params.nil?
       @flats = Flat.where(user: current_user)
     else
-      @flats = Flat.where(city: params[:city])
+      @flats = Flat.where(city: params[:city]).where("capacity >= #{params[:capacity]}")
     end
   # attention : ajouter .where(flat.user == current_user) quand devise sera integre
   end
