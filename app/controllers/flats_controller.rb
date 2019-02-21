@@ -1,6 +1,5 @@
 class FlatsController < ApplicationController
-
- def list
+def list
    @show_type = params[:city].nil? & params[:capacity].nil?
    if @show_type
      @flats = Flat.where(user: current_user)
@@ -15,7 +14,8 @@ class FlatsController < ApplicationController
     @markers = @flat_to_locate.map do |flat|
       {
         lng: flat.longitude,
-        lat: flat.latitude
+        lat: flat.latitude,
+        infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat })
       }
     end
  end
