@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>My flats</h1>
+  <h1><%#= if @show_type : "My flats" | "Your flats' search" %>Flats</h1>
   <% @flats.each do |flat| %>
   <div class="card-list">
     <div class="flat-photo">
@@ -7,13 +7,21 @@
     </div>
     <div class="flat-content">
       <h4><%= flat.title %></h4>
-      <p><%= flat.city %></p>
+      <p><%= flat.id %></p>
+      <p><%= flat.address %></p>
       <p><%= flat.description%></p>
       <p> <%= flat.price %> $ |
         <span> <%= flat.capacity %> persons</span>
       </p>
       <%= link_to "book", new_flat_booking_path(flat.id) %>
     </div>
+    <div
+      id="map"
+      style="width: 100%;
+      height: 500px;"
+      data-markers="<%= @markers.to_json %>"
+      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+    ></div>
   </div>
   <% end %>
 </div>
