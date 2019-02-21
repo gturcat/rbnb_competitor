@@ -20,6 +20,13 @@ class BookingsController < ApplicationController
     end
   end
 
+  def destroy
+    @flat = Flat.find(params[:id])
+    @flat.destroy
+    redirect_to bookings_path
+    # TODO = sendmail.
+  end
+
   private
 
   def booking_params

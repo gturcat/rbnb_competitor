@@ -1,15 +1,15 @@
 class FlatsController < ApplicationController
-def list
-   @show_type = params[:address].nil? & params[:capacity].nil?
-   if @show_type
-     @flats = Flat.where(user: current_user)
-   else
-     @flats = Flat.all
-     @flats = @flats.near(params[:address], 10) if params[:address] != ""
-     @flats = @flats.where("capacity >= #{params[:capacity]}") if params[:capacity] != ""
-   end
+  def list
+    @show_my_flats = params[:address].nil? & params[:capacity].nil?
+    if @show_my_flats
+      @flats = Flat.where(user: current_user)
+    else
+      @flats = Flat.all
+      @flats = @flats.near(params[:address], 10) if params[:address] != ""
+      @flats = @flats.where("capacity >= #{params[:capacity]}") if params[:capacity] != ""
+    end
 
-   @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
+    @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
 
     @markers = @flat_to_locate.map do |flat|
       {
@@ -18,7 +18,7 @@ def list
         infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat })
       }
     end
- end
+  end
 
   def new
     @flat = Flat.new
@@ -34,11 +34,25 @@ def list
     end
   end
 
+  def edit
+    @flat = Flat.find(params[:id])
+  end
+
+  def update
+    @flat = Flat.find(params[:id])
+    @flat.update(flat_params)
+    redirect_to flats_list_path
+  end
+
+  def destroy
+    @flat = Flat.find(params[:id])
+    @flat.destroy
+    redirect_to flats_list_path
+  end
+
   private
 
   def flat_params
     params.require(:flat).permit(:address, :title, :description, :capacity, :price, :photo)
   end
-
 end
-
