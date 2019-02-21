@@ -1,6 +1,6 @@
 class FlatsController < ApplicationController
 def list
-   @show_type = params[:city].nil? & params[:capacity].nil?
+   @show_type = params[:address].nil? & params[:capacity].nil?
    if @show_type
      @flats = Flat.where(user: current_user)
    else
