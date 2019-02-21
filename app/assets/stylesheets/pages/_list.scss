@@ -1,0 +1,42 @@
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.flex-container {
+  display:flex;
+
+}
+
+.card-list {
+  flex: 0 0 60%;
+  padding: 0px 50px;
+}
+
+.flat-card {
+  display:flex;
+  align-items: start;
+  justify-content:flex-start;
+  padding-top: 15px;
+}
+
+#map {
+flex: 0 0 40%;
+position: sticky !important; /* !important to override Gmaps inline CSS */
+top: 0 !important;
+}
+
+.flat-content {
+font-size: 15px;
+padding-left: 15px;
+}
+
+
+.flat-photo {
+  height: 100%;
+}
+
