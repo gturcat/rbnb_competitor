@@ -1,16 +1,18 @@
 class FlatsController < ApplicationController
 
  def list
-   if params[:city].nil? & params[:capacity].nil?
+   @show_type = params[:city].nil? & params[:capacity].nil?
+   if @show_type
      @flats = Flat.where(user: current_user)
    else
      @flats = Flat.all
-     @flats = @flats.where(city: params[:city]) if params[:city] != ""
+     @flats = @flats.near(params[:address], 10) if params[:address] != ""
      @flats = @flats.where("capacity >= #{params[:capacity]}") if params[:capacity] != ""
    end
-   @flats = @flats.where.not(latitude: nil, longitude: nil)
 
-    @markers = @flats.map do |flat|
+   @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
+
+    @markers = @flat_to_locate.map do |flat|
       {
         lng: flat.longitude,
         lat: flat.latitude
@@ -18,15 +20,13 @@ class FlatsController < ApplicationController
     end
  end
 
-
-
   def new
     @flat = Flat.new
   end
 
   def create
     @flat = Flat.new(flat_params)
-    @flat.user = User.last
+    @flat.user = current_user
     if @flat.save
       redirect_to flats_list_path
     else
@@ -37,7 +37,7 @@ class FlatsController < ApplicationController
   private
 
   def flat_params
-    params.require(:flat).permit(:country, :city, :street, :street_number, :zip_code, :title, :description, :capacity, :price, :photo)
+    params.require(:flat).permit(:address, :title, :description, :capacity, :price, :photo)
   end
 
 end

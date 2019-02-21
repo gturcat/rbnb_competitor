@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_211408) do
+ActiveRecord::Schema.define(version: 2019_02_21_051249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,13 +28,8 @@ ActiveRecord::Schema.define(version: 2019_02_20_211408) do
 
   create_table "flats", force: :cascade do |t|
     t.string "title"
-    t.string "city"
-    t.string "zip_code"
     t.text "description"
-    t.string "country"
-    t.string "street"
     t.integer "price"
-    t.string "street_number"
     t.integer "capacity"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -57,8 +52,8 @@ ActiveRecord::Schema.define(version: 2019_02_20_211408) do
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
-    t.string "avatar"
     t.text "bio"
+    t.string "photo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

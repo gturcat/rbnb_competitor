@@ -1,7 +1,5 @@
-
-<h1>Your Bookings</h1>
-
 <div class="container">
+  <h1>My Bookings</h1>
   <% @bookings.each do |booking| %>
   <div class="card-list">
     <div class="flat-photo">
@@ -11,10 +9,10 @@
       <h4><%= booking.flat.title %></h4>
       <p><%= booking.flat.city %></p>
       <p> <%= booking.start_date %>  |
-      <span> <%= booking.end_date %></span>
+        <span> <%= booking.end_date %></span>
       </p>
       <p> <%= booking.flat.price %> $ |
-      <span> <%= booking.flat.capacity %> persons</span>
+        <span> <%= booking.flat.capacity %> persons</span>
       </p>
     </div>
   </div>
