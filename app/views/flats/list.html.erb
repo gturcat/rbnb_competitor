@@ -21,7 +21,9 @@
     <br>
     <br>
     <br>
+  <% if policy(Flat).create? %>
     <%= link_to "Create a new flat" , new_flat_path  %>
+  <% end %>
   </div>
   <div
     id="map"

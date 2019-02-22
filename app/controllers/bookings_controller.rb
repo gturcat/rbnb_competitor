@@ -1,15 +1,18 @@
 class BookingsController < ApplicationController
   def index
     @bookings = Booking.where(user: current_user)
+    @bookings = policy_scope(Booking).order(created_at: :desc)
   end
 
   def new
     @booking = Booking.new
+    authorize @booking
     @flat = Flat.find(params[:flat_id])
   end
 
   def create
     @booking = Booking.new(booking_params)
+    authorize @booking
     @flat = Flat.find(params[:flat_id])
     @booking.user = current_user
     @booking.flat = @flat
@@ -18,13 +21,6 @@ class BookingsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def destroy
-    @flat = Flat.find(params[:id])
-    @flat.destroy
-    redirect_to bookings_path
-    # TODO = sendmail.
   end
 
   private
