@@ -17,9 +17,7 @@ class FlatsController < ApplicationController
       end
   end
 
- def list
-   @show_type = params[:city].nil? & params[:capacity].nil?
-def list
+  def list
    @show_type = params[:address].nil? & params[:capacity].nil?
    if @show_type
      @flats = Flat.where(user: current_user)
@@ -73,5 +71,4 @@ def list
     end
     available > 0 ? true : false
     end
-
 end
