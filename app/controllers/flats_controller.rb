@@ -14,6 +14,7 @@ class FlatsController < ApplicationController
 
     @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
 
+
     @markers = @flat_to_locate.map do |flat|
       {
         lng: flat.longitude,
@@ -63,4 +64,18 @@ class FlatsController < ApplicationController
   def flat_params
     params.require(:flat).permit(:address, :title, :description, :capacity, :price, :photo)
   end
+
+  def not_available?(flat)
+    available = 0
+    if (params[:start_date] != "" && params[:end_date] !="")
+    period = params[:start_date].to_date..params[:end_date].to_date
+    flat.bookings.each do |booking|
+      non_available_period = booking.start_date..booking.end_date
+      period.each do |day|
+        available +=1 if non_available_period.include?(day)
+        end
+      end
+    end
+    available > 0 ? true : false
+    end
 end
