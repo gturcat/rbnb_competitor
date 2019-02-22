@@ -13,6 +13,7 @@ class FlatsController < ApplicationController
        {
           lng: flat.longitude,
           lat: flat.latitude
+          # infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat })
         }
       end
   end
