@@ -1,5 +1,6 @@
 <div class="container-fluid flex-container">
   <div class="card-list">
+
     <h1>Flats</h1>
     <% @flats.each do |flat| %>
     <div class="flat-card">
@@ -26,9 +27,12 @@
     <br>
     <br>
     <br>
-    <% if policy(Flat).create? %>
-    <%= link_to "Create a new flat" , new_flat_path  %>
+    <% if policy(Flat).new? %>
+    <%= link_to "Want to add your flat?" , new_flat_path  %>
     <% end %>
+    <br>
+    <br>
+    <br>
   </div>
   <div
     id="map"

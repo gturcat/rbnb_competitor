@@ -12,25 +12,30 @@ class FlatPolicy < ApplicationPolicy
   def list?
     true
   end
+
   def new?
     true
   end
 
   def create?
+    # record.user == user
     true
   end
 
   def edit?
-    true
+    record.user == user
+    # true
   end
 
   def update?
-    true
+    record.user == user
+    # true
     # - record: the flat passed to the `authorize` method in controller
     # - user:   the `current_user` signed in with Devise.
   end
 
   def destroy?
-    true
+    record.user == user
+    # record.user == user
   end
 end
