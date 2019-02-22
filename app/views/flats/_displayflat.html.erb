@@ -1,0 +1,29 @@
+<div class="container-fluid flex-container">
+<!--   <h1><%#= if @show_type : "My flats" | "Your flats' search" %>Flats</h1> -->
+    <div class="card-list">
+      <% @flats.each do |flat| %>
+      <div class="flat-card">
+
+        <div class="flat-photo">
+        <%= cl_image_tag(flat.photo, width: 250, height: 200) %>
+        </div>
+        <div class="flat-content">
+        <p><strong><%= flat.title %></strong></p>
+        <p><%= flat.description%></p>
+        <p> <%= flat.price %> $ |
+          <%= flat.capacity %> persons |
+        <%= link_to "Book Now!", new_flat_booking_path(flat.id) %>
+         </p>
+      </div>
+
+      </div>
+    <% end %>
+  </div>
+  <div
+    id="map"
+    style="width: 100%;
+    height: calc(100vh - 70px);"
+    data-markers="<%= @markers.to_json %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+  ></div>
+</div>
