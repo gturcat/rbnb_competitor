@@ -1,2 +1,34 @@
-
-<%= render 'displayflat' %>
+<div class="container-fluid flex-container">
+  <div class="card-list">
+    <h1>Flats</h1>
+    <% @flats.each do |flat| %>
+    <div class="flat-card">
+      <div class="flat-photo">
+        <%= cl_image_tag(flat.photo, width: 250, height: 200) %>
+      </div>
+      <div class="flat-content">
+        <p><strong><%= flat.title %></strong></p>
+        <p><%= flat.description%></p>
+        <p> <%= flat.price %>
+          <%= flat.capacity %> persons |
+        </p>
+        <%= link_to "edit flat", edit_flat_path(flat) %> |
+        <%= link_to "delete flat", flat_path(flat), method: :delete, data: { confirm: "Are you sure?" } %>
+      </div>
+    </div>
+    <% end %>
+    <br>
+    <br>
+    <br>
+    <% if policy(Flat).create? %>
+    <%= link_to "Create a new flat" , new_flat_path  %>
+    <% end %>
+  </div>
+  <div
+    id="map"
+    style="width: 100%;
+    height: calc(100vh - 70px);"
+    data-markers="<%= @markers.to_json %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+  ></div>
+</div>

@@ -1,15 +1,18 @@
 class FlatsController < ApplicationController
   def index # reponse au search
+    arrival = params[:start_date].to_date
+    departure = params[:end_date].to_date
+    @booking = Booking.new(start_date: arrival, end_date: departure)
     @flats = Flat.all
     @flats = policy_scope(Flat).order(created_at: :desc)
     @flats = @flats.near(params[:address], 10) if params[:address] != ""
     @flats = @flats.where("capacity >= #{params[:capacity]}") if params[:capacity] != ""
-   #@flats = @flats.reject { |flat| not_available?(flat) }
 
-  @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
-  @flat_to_locate = @flat_to_locate.reject { |flat| not_available?(flat) }
-  @flats = @flat_to_locate
-  @markers = @flat_to_locate.map do |flat|
+
+    @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
+    @flat_to_locate = @flat_to_locate.reject { |flat| not_available?(flat) }
+    @flats = @flat_to_locate
+    @markers = @flat_to_locate.map do |flat|
        {
           lng: flat.longitude,
           lat: flat.latitude
@@ -75,7 +78,7 @@ class FlatsController < ApplicationController
 
   def not_available?(flat)
     available = 0
-    if (params[:start_date] != "" && params[:end_date] !="")
+    if (params[:start_date] !="" && params[:end_date] !="")
     period = params[:start_date].to_date..params[:end_date].to_date
     flat.bookings.each do |booking|
       non_available_period = booking.start_date..booking.end_date
