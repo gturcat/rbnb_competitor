@@ -10,11 +10,11 @@ class FlatsController < ApplicationController
 
     # @flats = @flats.reject { |flat| not_available?(flat) }
 
-  @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
-  @flat_to_locate = @flat_to_locate.reject { |flat| not_available?(flat) }
+    @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
+    @flat_to_locate = @flat_to_locate.reject { |flat| not_available?(flat) }
 
-  @flats = @flat_to_locate
-   create_markers(@flat_to_locate)
+    @flats = @flat_to_locate
+    create_markers(@flat_to_locate)
   end
 
   def list # My flats
@@ -22,10 +22,9 @@ class FlatsController < ApplicationController
     @flats = Flat.where(user: current_user)
     authorize @flats
 
-   @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
-   create_markers(@flat_to_locate) if !@flats.nil?
-   end
- end
+    @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
+    create_markers(@flat_to_locate) if !@flats.nil?
+  end
 
   def new
     @flat = Flat.new
@@ -71,9 +70,9 @@ class FlatsController < ApplicationController
   def not_available?(flat)
     available = 0
     if (params[:start_date] !="" && params[:end_date] !="")
-    period = params[:start_date].to_date..params[:end_date].to_date
-    flat.bookings.each do |booking|
-      non_available_period = booking.start_date..booking.end_date
+      period = params[:start_date].to_date..params[:end_date].to_date
+      flat.bookings.each do |booking|
+        non_available_period = booking.start_date..booking.end_date
         period.each do |day|
           available +=1 if non_available_period.include?(day)
         end
@@ -89,5 +88,6 @@ class FlatsController < ApplicationController
         lat: flat.latitude,
         infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat })
       }
+    end
   end
 end
