@@ -21,14 +21,17 @@
           <input type="date" class="form-control" name="end_date">
         </div>
         <div class="">
+
           <button type="submit" class="btn btn-primary btn-lg" >Search a Flat</button>
         </div>
       </form>
     </div>
     <div id="flat-create" class="flex-item-">
       <h2>Want to rent your own apartment ?</h2>
-      <%= link_to new_flat_path, class: "btn btn-primary btn-lg" do %>
-        <%= t(".create", default: "Create a Flat")%>
+      <% if policy(Flat).create? %>
+        <%= link_to new_flat_path, class: "btn btn-primary btn-lg" do %>
+          <%= t(".create", default: "Create a Flat")%>
+      <% end %>
       <% end %>
     </div>
   </div>
