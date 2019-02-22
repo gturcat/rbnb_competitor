@@ -21,6 +21,8 @@ gem 'uglifier'
 gem 'webpacker'
 gem "geocoder"
 gem 'faker', '~> 1.6.6'
+gem 'pg_search'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'

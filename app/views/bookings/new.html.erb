@@ -1,8 +1,8 @@
 <div class="flex-container-form">
   <h1>Make my booking<h1>
   <%= simple_form_for [@flat, @booking] do |f| %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
+  <%= f.input :start_date, as: :date, html5: true %>
+  <%= f.input :end_date, as: :date, html5: true %>
   <%= f.button :submit %>
   <% end %>
 </div>
