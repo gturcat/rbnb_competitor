@@ -1,21 +1,10 @@
 class FlatsController < ApplicationController
   def index # reponse au search
     @flats = Flat.all
+    @flats = policy_scope(Flat).order(created_at: :desc)
     @flats = @flats.near(params[:address], 10) if params[:address] != ""
     @flats = @flats.where("capacity >= #{params[:capacity]}") if params[:capacity] != ""
    #@flats = @flats.reject { |flat| not_available?(flat) }
-
-  def list
-    @show_my_flats = params[:address].nil? & params[:capacity].nil?
-
-    if @show_my_flats
-      @flats = Flat.where(user: current_user)
-    else
-      @flats = Flat.all
-      @flats = @flats.near(params[:address], 10) if params[:address] != ""
-      @flats = @flats.where("capacity >= #{params[:capacity]}") if params[:capacity] != ""
-    end
-    authorize @flats
 
   @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
   @flat_to_locate = @flat_to_locate.reject { |flat| not_available?(flat) }
@@ -28,18 +17,20 @@ class FlatsController < ApplicationController
       end
   end
 
-  def list #action pour les lists d'un proprio
+  def list
+     @flats = Flat.where(user: current_user)
+    authorize @flats
 
-    @flats = Flat.where(user: current_user)
-    @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
-    @markers = @flat_to_locate.map do |flat|
-      {
-        lng: flat.longitude,
-        lat: flat.latitude,
-        infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat })
-      }
-    end
-  end
+   @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
+
+   @markers = @flat_to_locate.map do |flat|
+     {
+       lng: flat.longitude,
+       lat: flat.latitude,
+       infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat })
+     }
+   end
+ end
 
   def new
     @flat = Flat.new
