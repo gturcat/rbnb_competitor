@@ -11,7 +11,7 @@
     flats_list_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <!-- Mybookings link (when logged in) -->
     <%= link_to t(".my_bookings", default: "My Bookings"),
-    bookings_index_path, class: "navbar-wagon-item navbar-wagon-link" %>
+    bookings_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <div class="navbar-wagon-item">
       <!-- Avatar with dropdown menu -->
       <div class="dropdown">
@@ -54,7 +54,7 @@
         </li>
         <!-- Mybookings link (when logged in) -->
         <li> <%= link_to t(".my_bookings", default: "My Bookings"),
-          bookings_index_path, class: "navbar-wagon-item navbar-wagon-link" %>
+          bookings_path, class: "navbar-wagon-item navbar-wagon-link" %>
         </li>
         <li>
           <%= link_to edit_user_registration_path do %>

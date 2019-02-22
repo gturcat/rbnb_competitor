@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'bookings/index'
-  get 'bookings/new'
-  get 'bookings/create'
   get '/flats/list', to: 'flats#list'
   devise_for :users
   root to: 'pages#home'

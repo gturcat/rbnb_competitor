@@ -1,31 +1,28 @@
 <div class="container-fluid flex-container">
   <div class="card-list">
-    <h1>
-    <% if @show_my_flats %>
-      My <%= pluralize @flats.size, "flat" %>
-    <% else %>
-      <%= pluralize @flats.size, "flat" %> match your search</h1>
-    <% end %>
+
+    <h1>Flats</h1>
     <% @flats.each do |flat| %>
-      <div class="flat-card">
-        <div class="flat-photo">
-          <%= cl_image_tag(flat.photo, width: 250, height: 200) %>
-        </div>
-        <div class="flat-content">
-          <p><strong><%= flat.title %></strong></p>
-          <p><%= flat.description%></p>
-          <p> <%= flat.price %> $ |
-            <%= flat.capacity %> persons |
-            <%= link_to "Book Now!", new_flat_booking_path(flat) %>
-          </p>
-          <% if policy(flat).edit? %>
-          <%= link_to "edit flat", edit_flat_path(flat) %> |
-          <% end %>
-          <% if policy(flat).destroy? %>
-          <%= link_to "delete flat", flat_path(flat), method: :delete, data: { confirm: "Are you sure?" } %>
-          <% end %>
-        </div>
+    <div class="flat-card">
+      <div class="flat-photo">
+        <%= cl_image_tag(flat.photo, width: 250, height: 200) %>
       </div>
+      <div class="flat-content">
+        <p><strong><%= flat.title %></strong></p>
+        <p><%= flat.description%></p>
+        <p> <%= flat.price %>
+          <%= flat.capacity %> persons |
+        </p>
+        <%= simple_form_for [flat, @booking] do |f| %>
+        <%= f.hidden_field :start_date, as: :date, html5: true %>
+        <%= f.hidden_field :end_date, as: :date, html5: true%>
+        <%= f.button :submit %>
+        <% end %>
+
+        <%= link_to "edit flat", edit_flat_path(flat) %> |
+        <%= link_to "delete flat", flat_path(flat), method: :delete, data: { confirm: "Are you sure?" } %>
+      </div>
+    </div>
     <% end %>
     <br>
     <br>
