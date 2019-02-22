@@ -1,4 +1,9 @@
 class FlatsController < ApplicationController
+  def index # reponse au search
+    @flats = Flat.all
+    @flats = @flats.near(params[:address], 10) if params[:address] != ""
+    @flats = @flats.where("capacity >= #{params[:capacity]}") if params[:capacity] != ""
+   #@flats = @flats.reject { |flat| not_available?(flat) }
 
   def list
     @show_my_flats = params[:address].nil? & params[:capacity].nil?
@@ -12,9 +17,21 @@ class FlatsController < ApplicationController
     end
     authorize @flats
 
+  @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
+  @flat_to_locate = @flat_to_locate.reject { |flat| not_available?(flat) }
+  @flats = @flat_to_locate
+  @markers = @flat_to_locate.map do |flat|
+       {
+          lng: flat.longitude,
+          lat: flat.latitude
+        }
+      end
+  end
+
+  def list #action pour les lists d'un proprio
+
+    @flats = Flat.where(user: current_user)
     @flat_to_locate = @flats.where.not(latitude: nil, longitude: nil)
-
-
     @markers = @flat_to_locate.map do |flat|
       {
         lng: flat.longitude,

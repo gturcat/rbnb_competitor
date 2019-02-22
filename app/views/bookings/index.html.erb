@@ -1,11 +1,11 @@
 <div class="container">
   <h1>My Bookings</h1>
   <% @bookings.each do |booking| %>
-  <div class="card-list">
-    <div class="flat-photo">
+  <div class="booking-list">
+    <div class="booking-photo">
       <%= cl_image_tag(booking.flat.photo, height: 250, width: 350) %>
     </div>
-    <div class="flat-content">
+    <div class="booking-content">
       <h4><%= booking.flat.title %></h4>
       <p><%= booking.flat.address %></p>
       <p> <%= booking.start_date %>  |
